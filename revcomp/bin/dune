@@ -1,0 +1,4 @@
+(executable
+ (public_name revcomp)
+ (name main)
+ (libraries revcomp))

@@ -1,0 +1,7 @@
+(library
+ (preprocess (pps ppx_deriving.show))
+ (flags (:standard -w -66))
+ (name revcomp)
+ (libraries sexplib))
+(menhir (modules parser))
+(ocamllex lexer)
