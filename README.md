@@ -1,4 +1,15 @@
-# reversibleComputing
+# revcomp
+
+Revcomp is a toy functional programming language based on Theseus and
+which follows the formalism from the following papers : 
+
+- [Categorical Semantics of Reversible Pattern-Matching](https://arxiv.org/abs/2109.05837)
+- [Semantics for a Turing-complete Reversible Programming Language with Inductive Types](https://arxiv.org/abs/2309.12151)
+
+It allows to build first-order reversible functions which the help of
+reversible pattern-matching.
+
+# Building the project
 
 First, move to the dune project folder.
 
