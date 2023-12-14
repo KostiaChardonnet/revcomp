@@ -13,12 +13,13 @@ type iso_type =
   [@@deriving show]
 
 type value = 
-  | Var of id
-  | Unit 
-  | Pair of value * value 
-  | InjL of value
-  | InjR of value 
-  | Fold of value
+  [ `Var of id
+  | `Unit 
+  | `Pair of value * value 
+  | `InjL of value
+  | `InjR of value 
+  | `Fold of value
+  ]
   [@@deriving show]
 
 type pattern = 
@@ -26,23 +27,27 @@ type pattern =
   | PPair of pattern * pattern
   [@@deriving show]
 
-type expression = 
+type expr = 
   | EVal of value
-  | ELet of pattern * value * expression 
+  | ELet of pattern * value * expr 
   [@@deriving show]
 
-type iso = (value * expression) list
+type iso = (value * expr) list
   [@@deriving show]
 
 type term = 
-  | TVar of id 
-  | TUnit
-  | TPair of term * term 
-  | TInjL of term 
-  | TInjR of term 
-  | Fold of term
-  | TLet of pattern * term * term 
-  | TApp of iso * term
+  [ `Var of id 
+  | `Unit
+  | `Pair of term * term 
+  | `InjL of term 
+  | `InjR of term 
+  | `Fold of term
+  | `Let of pattern * term * term 
+  | `App of iso * term
+  ]
   [@@deriving show]
+
+type def = id * (id list) * iso
+type prog = def list * term 
 
 type typing_ctx = (id * base_type) list

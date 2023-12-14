@@ -26,14 +26,26 @@ dune exec revcomp
 
 ## Use
 
-Type terms in the following syntax:
+Type expressions <expr> in the following syntax:
 
 ```
-<term> ::=
-  | id (lowercase alphanumeric)
+<id> ::= lowercase alphanumeric
+
+<value> ::=
+  | true
+  | false
+  | <id>
   | ()
   | (<term>, <term>)
-  | left <term>
-  | right <term>
+  | #l <term>
+  | #r <term>
   | fold <term>
+
+<pattern> ::=
+  | <id>
+  | (<pattern>, <pattern>)
+
+<expr> ::=
+  | <value>
+  | let <pattern> = <value> in <expr>
 ```

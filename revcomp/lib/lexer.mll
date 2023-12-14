@@ -5,15 +5,20 @@ let space   = [' ' '\t']+
 let newline = '\r' | '\n' | "\r\n"
 
 rule read = parse
-  | '('     { LEFT_PAR }
-  | ')'     { RIGHT_PAR }
-  | ','     { COMMA }
-  | "fold"  { FOLD }
-  | "let"   { LET }
-  | "in"    { IN }
-  | "left"  { LEFT }
-  | "right" { RIGHT }
-  | space   { read lexbuf }
-  | newline { EOL }
-  | eof     { EOF }
-  | id      { VAR (Lexing.lexeme lexbuf) }
+| '('     { LEFT_PAR }
+| ')'     { RIGHT_PAR }
+| ','     { COMMA }
+| '='     { EQ }
+| '|'     { BAR }
+| "<->"   { EQQ }
+| "true"  { TRUE }
+| "false" { FALSE }
+| "fold"  { FOLD }
+| "let"   { LET }
+| "in"    { IN }
+| "#l"    { LEFT }
+| "#r"    { RIGHT }
+| space   { read lexbuf }
+| newline { EOL }
+| eof     { EOF }
+| id      { ID (Lexing.lexeme lexbuf) }
