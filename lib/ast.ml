@@ -32,7 +32,10 @@ type expr =
   | ELet of pattern * value * expr 
   [@@deriving show]
 
-type iso = (value * expr) list
+type clause = value * expr
+  [@@deriving show]
+
+type iso = id * id list * clause list
   [@@deriving show]
 
 type term = 
@@ -47,7 +50,7 @@ type term =
   ]
   [@@deriving show]
 
-type def = id * (id list) * iso
-type prog = def list * term 
+type prog = iso list
+  [@@deriving show]
 
 type typing_ctx = (id * base_type) list

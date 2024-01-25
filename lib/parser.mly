@@ -15,11 +15,11 @@
 %token EQQ
 %token BAR
 
-%start <Ast.expr> main
+%start <Ast.prog> main
 
 %%
 
-main: t = expr { t }
+main: p = prog { p }
 
 value:
 | TRUE { `InjL `Unit }
@@ -42,11 +42,12 @@ expr:
 | LET; p=pattern; EQ; v=value; IN; e=expr
   { Ast.ELet (p, v, e) }
 
-eqq:
+clause:
 | v=value; EQQ; e=expr { (v, e) }
 
 iso:
-| i=separated_nonempty_list(BAR, eqq) { i }
+| f=ID; xs=list(ID); EQ; BAR?; cs=list(clause)
+  { (f, xs, cs) }
 
 term:
 | v=value { v }
@@ -55,10 +56,6 @@ term:
 | i=iso; t=term
   { `App (i, t) }
 
-def:
-| f=ID; l=list(ID); i=iso
-  { (f, l, i) }
-
 prog:
-| l=nonempty_list(def); t=term
-  { (l, t) }
+| l=nonempty_list(iso)
+  { l }

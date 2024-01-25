@@ -59,4 +59,15 @@ Type expressions <expr> in the following syntax:
 <expr> ::=
   | <value>
   | let <pattern> = <value> in <expr>
+
+<clause> ::= (<value>, <expr>)
+
+<iso> ::= <id>f <id>x1 ... <id>xn =
+          | <value>v1 <-> <expr>e1
+          | ...
+          | <value>vm <-> <expr>em
+
+<prog> ::= <iso> ... <iso>
 ```
+
+where `|` are actual symbols of the syntax for isos. Programs are sequences of isos.
