@@ -1,0 +1,10 @@
+let not = 
+    | true <-> false 
+    | false <-> true
+
+let cnot =
+    | (true, y) <-> let z = not y in (true, z)
+    | (false, y) <-> (false, y)
+
+
+cnot (true, true)

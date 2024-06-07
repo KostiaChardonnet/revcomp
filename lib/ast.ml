@@ -5,7 +5,6 @@ type base_type =
   | TypeVar of id
   | Tens of base_type * base_type 
   | Plus of base_type * base_type 
-  | Mu of id * base_type
   [@@deriving show]
 
 type iso_type = 
@@ -18,7 +17,6 @@ type value =
   | `Pair of value * value 
   | `InjL of value
   | `InjR of value 
-  | `Fold of value
   ]
   [@@deriving show]
 
@@ -35,7 +33,9 @@ type expr =
 type clause = value * expr
   [@@deriving show]
 
-type iso = id * id list * clause list
+type iso = 
+  | Lambda of id * id list * clause list (* identifier * list of lambdas * body *)
+  | App of iso * iso
   [@@deriving show]
 
 type term = 
@@ -44,7 +44,6 @@ type term =
   | `Pair of term * term 
   | `InjL of term 
   | `InjR of term 
-  | `Fold of term
   | `Let of pattern * term * term 
   | `App of iso * term
   ]

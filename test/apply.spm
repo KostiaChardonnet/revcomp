@@ -1,0 +1,8 @@
+let had = 
+    | true <-> 1/sqrt(2) true + 1/sqrt(2) false 
+    | false <-> 1/sqrt(2) true - 1/sqrt(2) false
+
+let apply f =
+    | x <-> let y = f x in  y
+
+(apply had) true
